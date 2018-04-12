@@ -4,17 +4,17 @@ import net.service.art.model.Article;
 import net.service.art.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by Ivan.
  */
-@Controller
+@RestController
+@RequestMapping
 public class ArticleController {
     private ArticleService service;
 
@@ -24,18 +24,15 @@ public class ArticleController {
         this.service = service;
     }
 
-    @RequestMapping(value = "articles", method = RequestMethod.GET)
-    public String listArticles(Model model){
-        model.addAttribute("article", new Article());
-        model.addAttribute("listArticles", this.service.listArticles());
-
-        return "articles";
+    @RequestMapping(value = "/articles", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Article> listArticles(){
+        return service.listArticles();
     }
 
     @RequestMapping(value = "/articles/add", method = RequestMethod.POST)
-    public String addArticle(@ModelAttribute("article") Article article) {
+    public String save(@ModelAttribute("article") Article article) {
         if(article.getId() == 0) {
-            this.service.createArticle(article);
+            this.service.saveArticle(article);
         } else {
             this.service.updateArticle(article);
         }
@@ -54,10 +51,22 @@ public class ArticleController {
         model.addAttribute("listArticles", this.service.listArticles());
         return "articles";
     }
+    
+    
+    //---->-JSON-format
+    @RequestMapping(value = "/article/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Article articleData(@PathVariable("id") int id){
+        return service.getArticleById(id);
+    }
 
-    @RequestMapping("/articledata/{id}")
-    public String articleData(@PathVariable("id") int id, Model model){
-        model.addAttribute("article", this.service.getArticleById(id));
-        return "articledata";
+    
+    @RequestMapping(value = "/article/deleted/{userid}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Article delete(@PathVariable("userid") int userid, @PathVariable("id") int id) {
+        return service.delete(userid, id);
+    }
+
+    @RequestMapping(value = "/article/get/{userid}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Article get(@PathVariable("userid") int userid, @PathVariable("id") int id) {
+        return service.get(userid, id);
     }
 }

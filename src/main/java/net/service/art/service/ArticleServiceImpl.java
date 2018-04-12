@@ -20,8 +20,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional
-    public void createArticle(Article article) {
-        this.repository.createArticle(article);
+    public void saveArticle(Article article) {
+        this.repository.saveArticle(article);
     }
 
     @Override
@@ -40,6 +40,18 @@ public class ArticleServiceImpl implements ArticleService {
     @Transactional
     public Article getArticleById(int id) {
         return this.repository.getArticleById(id);
+    }
+
+    @Override
+    @Transactional
+    public Article delete(int userid, int id) {
+        return this.repository.delete(userid, id);
+    }
+
+    @Override
+    @Transactional
+    public Article get(int userid, int id) {
+        return this.repository.get(userid, id);
     }
 
     @Override

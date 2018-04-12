@@ -12,11 +12,13 @@
         <th width="80">id</th>
         <th width="120">name</th>
         <th width="120">text</th>
+        <th width="120">userid</th>
     </tr>
     <tr>
         <td>${article.id}</td>
         <td>${article.articleName}</td>
         <td>${article.articleText}</td>
+        <td>${article.userid}</td>
     </tr>
 </table>
 </body>

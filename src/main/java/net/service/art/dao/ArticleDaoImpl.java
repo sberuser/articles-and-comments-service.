@@ -3,8 +3,8 @@ package net.service.art.dao;
 import net.service.art.model.Article;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-
 import java.util.List;
 
 /**
@@ -19,7 +19,7 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
-    public void createArticle(Article article) {
+    public void saveArticle(Article article) {
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(article);
     }
@@ -38,6 +38,37 @@ public class ArticleDaoImpl implements ArticleDao {
         if (article != null) {
             session.delete(article);
         }
+    }
+
+    @Override
+    public Article delete(int userid, int id) {
+        Article article = null;
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Article> articleList = session.createCriteria(Article.class)
+                .add(Restrictions.eq("userid", userid))
+                .add(Restrictions.eq("id", id))
+                .list();
+
+        if(!articleList.isEmpty()) {
+            article = articleList.get(0);
+            session.delete(article);
+        }
+        return article;
+    }
+
+    @Override
+    public Article get(int userid, int id) {
+        Article article = null;
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Article> articleList = session.createCriteria(Article.class)
+                .add(Restrictions.eq("userid", userid))
+                .add(Restrictions.eq("id", id))
+                .list();
+
+        if(!articleList.isEmpty()) {
+            article = articleList.get(0);
+        }
+        return article;
     }
 
     @Override

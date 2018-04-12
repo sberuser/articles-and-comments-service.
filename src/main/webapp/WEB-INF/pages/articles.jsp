@@ -1,13 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Ivan
-  Date: 08.04.2018
-  Time: 14:04
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -27,6 +21,7 @@
     <th width="80">id</th>
     <th width="120">name</th>
     <th width="120">text</th>
+    <th width="120">user</th>
     <th width="60">Edit</th>
     <th width="60">Delete</th>
     </tr>
@@ -45,7 +40,7 @@
 
 <h1>Add your article</h1>
 
-<c:url var="addAction" value="/articles/add"/>
+<c:url var="addAction" value=""/>
 
 <form:form action="${addAction}" commandName="article">
     <table>
@@ -89,6 +84,18 @@
                            value="<spring:message text="Edit article"/>"/>
                 </c:if>
                 <c:if test="${empty article.articleName}">
+                    <input type="submit"
+                           value="<spring:message text="Add article"/>"/>
+                </c:if>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <c:if test="${!empty article.userid}">
+                    <input type="submit"
+                           value="<spring:message text="Edit article"/>"/>
+                </c:if>
+                <c:if test="${empty article.userid}">
                     <input type="submit"
                            value="<spring:message text="Add article"/>"/>
                 </c:if>
