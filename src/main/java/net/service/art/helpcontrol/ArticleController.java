@@ -1,4 +1,4 @@
-package net.service.art.controller;
+package net.service.art.helpcontrol;
 
 import net.service.art.model.Article;
 import net.service.art.service.ArticleService;
@@ -24,6 +24,7 @@ public class ArticleController {
         this.service = service;
     }
 
+    //---> JSON
     @RequestMapping(value = "/articles", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Article> listArticles(){
         return service.listArticles();
@@ -60,13 +61,13 @@ public class ArticleController {
     }
 
     
-    @RequestMapping(value = "/article/deleted/{userid}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Article delete(@PathVariable("userid") int userid, @PathVariable("id") int id) {
-        return service.delete(userid, id);
+    @RequestMapping(value = "/article/deleted/{userId}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Article delete(@PathVariable("userId") int userId, @PathVariable("id") int id) {
+        return service.delete(userId, id);
     }
 
-    @RequestMapping(value = "/article/get/{userid}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Article get(@PathVariable("userid") int userid, @PathVariable("id") int id) {
-        return service.get(userid, id);
+    @RequestMapping(value = "/article/get/{userId}/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Article get(@PathVariable("userId") int userId, @PathVariable("id") int id) {
+        return service.get(userId, id);
     }
 }

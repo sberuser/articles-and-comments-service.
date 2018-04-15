@@ -1,13 +1,14 @@
 package net.service.art.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+import net.service.art.DateUtil;
+import net.service.art.ParseDeserializer;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Created by Ivan.
@@ -15,38 +16,42 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Table(name = "articles")
 public class Article implements Serializable {
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "userid")
-    private int userid;
+    @Column(name = "userId")
+    private int userId;
 
     @Column(name = "text")
-    private String articleText;
+    private String text;
 
     @Column(name = "name")
-    private String articleName;
+    private String name;
 
-    @Column(name = "date", columnDefinition = "TIMESTAMP")
-    private LocalDateTime date;
+    @Column(name = "dateTime", updatable = false)
+    @Convert(converter = DateUtil.class)
+    @JsonSerialize(using = ToStringSerializer.class)
+    @JsonDeserialize(using = ParseDeserializer.class)
+    private LocalDateTime dateTime;
 
 
-    public LocalDateTime getDate() {
-        return date;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
-    public int getUserid() {
-        return userid;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUserid(int user) {
-        this.userid = user;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public int getId() {
@@ -57,25 +62,25 @@ public class Article implements Serializable {
         this.id = id;
     }
 
-    public String getArticleText() {
-        return articleText;
+    public String getText() {
+        return text;
     }
 
-    public void setArticleText(String articleText) {
-        this.articleText = articleText;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getArticleName() {
-        return articleName;
+    public String getName() {
+        return name;
     }
 
-    public void setArticleName(String articleName) {
-        this.articleName = articleName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
     public String toString() {
-        return "Article name: " + articleName + "/n" +
+        return "Article name: " + name + "/n" +
                 "Article ID: " + id;
     }
 }

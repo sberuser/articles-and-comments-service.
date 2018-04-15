@@ -26,14 +26,14 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional
-    public void updateArticle(Article article) {
-        this.repository.updateArticle(article);
+    public Article updateArticle(Article article) {
+        return this.repository.updateArticle(article);
     }
 
     @Override
     @Transactional
-    public void removeArticle(int id) {
-        this.repository.removeArticle(id);
+    public Article removeArticle(int id) {
+        return this.repository.removeArticle(id);
     }
 
     @Override
@@ -44,19 +44,25 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional
-    public Article delete(int userid, int id) {
-        return this.repository.delete(userid, id);
+    public Article delete(int userId, int id) {
+        return this.repository.delete(userId, id);
     }
 
     @Override
     @Transactional
-    public Article get(int userid, int id) {
-        return this.repository.get(userid, id);
+    public Article get(int userId, int id) {
+        return this.repository.get(userId, id);
     }
 
     @Override
     @Transactional
     public List<Article> listArticles() {
         return this.repository.listArticles();
+    }
+
+    @Override
+    @Transactional
+    public List<Article> getAll(int userId) {
+        return this.repository.getAll(userId);
     }
 }

@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
 import java.util.List;
 
 /**
@@ -25,49 +26,47 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
-    public void updateArticle(Article article) {
+    public Article updateArticle(Article article) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(article);
+        return article;
     }
 
     @Override
-    public void removeArticle(int id) {
+    public Article removeArticle(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Article article = (Article) session.load(Article.class, new Integer(id));
 
         if (article != null) {
             session.delete(article);
         }
+        return article;
     }
 
     @Override
-    public Article delete(int userid, int id) {
-        Article article = null;
+    public Article delete(int userId, int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Article> articleList = session.createCriteria(Article.class)
-                .add(Restrictions.eq("userid", userid))
+        Article article = (Article) session.createCriteria(Article.class)
+                .add(Restrictions.eq("userId", userId))
                 .add(Restrictions.eq("id", id))
-                .list();
-
-        if(!articleList.isEmpty()) {
-            article = articleList.get(0);
+                .list().stream()
+                .findFirst()
+                .orElse(null);
+        if (article != null) {
             session.delete(article);
         }
         return article;
     }
 
     @Override
-    public Article get(int userid, int id) {
-        Article article = null;
+    public Article get(int userId, int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        List<Article> articleList = session.createCriteria(Article.class)
-                .add(Restrictions.eq("userid", userid))
+        Article article = (Article) session.createCriteria(Article.class)
+                .add(Restrictions.eq("userId", userId))
                 .add(Restrictions.eq("id", id))
-                .list();
-
-        if(!articleList.isEmpty()) {
-            article = articleList.get(0);
-        }
+                .list().stream()
+                .findFirst()
+                .orElse(null);
         return article;
     }
 
@@ -84,5 +83,15 @@ public class ArticleDaoImpl implements ArticleDao {
         Session session = this.sessionFactory.getCurrentSession();
         List<Article> articleList = session.createQuery("from Article").list();
         return articleList;
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<Article> getAll(int userId) {
+        Session session = this.sessionFactory.getCurrentSession();
+        List<Article> articles = session.createCriteria(Article.class)
+                .add(Restrictions.eq("userId", userId))
+                .list();
+        return articles;
     }
 }

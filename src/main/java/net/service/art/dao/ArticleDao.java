@@ -10,15 +10,17 @@ import java.util.List;
 public interface ArticleDao {
     public void saveArticle(Article article);
 
-    public void updateArticle(Article article);
+    public Article updateArticle(Article article);
 
-    public void removeArticle(int id);
+    public Article removeArticle(int id);
 
-    public Article delete(int userid, int id);
+    public Article delete(int userId, int id);
 
-    public Article get(int userid, int id);
+    public Article get(int userId, int id);
 
     public Article getArticleById(int id);
 
     public List<Article> listArticles();
+
+    public List<Article> getAll(int userId);
 }
