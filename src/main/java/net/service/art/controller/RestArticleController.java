@@ -49,11 +49,10 @@ public class RestArticleController {
         return service.delete(userId, id);
     }
 
-    @RequestMapping(value = "/article/{id}/{userId}", method = RequestMethod.GET,
+    @RequestMapping(value = "/article/{id}", method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public Article getArticleData(@PathVariable("id") Integer id,
-                                  @PathVariable("userId") Integer userId) {
-        return service.get(userId, id);
+    public Article getArticleData(@PathVariable("id") Integer id) {
+        return service.get(id);
     }
 
     @RequestMapping(value = "/articles/{userId}", method = RequestMethod.GET,

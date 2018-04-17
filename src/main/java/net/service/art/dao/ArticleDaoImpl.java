@@ -59,10 +59,9 @@ public class ArticleDaoImpl implements ArticleDao {
     }
 
     @Override
-    public Article get(int userId, int id) {
+    public Article get(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Article article = (Article) session.createCriteria(Article.class)
-                .add(Restrictions.eq("userId", userId))
                 .add(Restrictions.eq("id", id))
                 .list().stream()
                 .findFirst()

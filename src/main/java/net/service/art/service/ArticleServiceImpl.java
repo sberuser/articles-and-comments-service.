@@ -50,8 +50,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional
-    public Article get(int userId, int id) {
-        return this.repository.get(userId, id);
+    public Article get(int id) {
+        return this.repository.get(id);
     }
 
     @Override

@@ -16,7 +16,7 @@ public interface ArticleService {
 
     public Article delete(int userId, int id);
 
-    public Article get(int userId, int id);
+    public Article get(int id);
 
     public Article getArticleById(int id);
 

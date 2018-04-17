@@ -32,7 +32,7 @@
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5432/articles"/>
         <property name="username" value="postgres"/>
-        <property name="password" value="root"/>
+        <property name="password" value="admin"/>
     </bean>
 
     <!-- Hibernate 4 SessionFactory Bean definition -->
@@ -42,6 +42,7 @@
         <property name="annotatedClasses">
             <list>
                 <value>net.service.art.model.Article</value>
+                <value>net.service.art.model.Comment</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -53,7 +54,7 @@
         </property>
     </bean>
 
-    <!--ArticleDao and ArticleService beans-->
+    <!--beans-->
     <bean id="articleDao" class="net.service.art.dao.ArticleDaoImpl">
         <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
@@ -61,6 +62,15 @@
     <bean id="artService" class="net.service.art.service.ArticleServiceImpl">
         <property name="repository" ref="articleDao"/>
     </bean>
+
+    <bean id="commentDao" class="net.service.art.dao.CommentDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="commentService" class="net.service.art.service.CommentServiceImpl">
+        <property name="repository" ref="commentDao"/>
+    </bean>
+
 
     <context:component-scan base-package="net.service.art"/>
 
