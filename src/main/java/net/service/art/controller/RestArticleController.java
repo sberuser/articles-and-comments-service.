@@ -32,8 +32,7 @@ public class RestArticleController {
     @RequestMapping(value = "/article/{userId}", method = RequestMethod.POST,
                     consumes = MediaType.APPLICATION_JSON_VALUE,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Article save(@RequestBody Article article,
-                                      @PathVariable("userId") Integer userId) {
+    public @ResponseBody Article save(@RequestBody Article article) {
         if(article.getId() == 0) {
             this.service.saveArticle(article);
         } else {

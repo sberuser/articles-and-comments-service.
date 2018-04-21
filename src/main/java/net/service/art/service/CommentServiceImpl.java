@@ -31,13 +31,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public Comment delete(int id, int userId) {
-        return this.repository.delete(id, userId);
+    public Comment delete(int articleId, int userId) {
+        return this.repository.delete(articleId, userId);
     }
 
     @Override
     @Transactional
-    public List<Comment> getAll(int userId) {
-        return this.repository.getAll(userId);
+    public List<Comment> getAll(int id) {
+        return this.repository.getAll(id);
     }
 }

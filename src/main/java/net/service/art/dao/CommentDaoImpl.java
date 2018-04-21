@@ -35,11 +35,11 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public Comment delete(int id, int userId) {
+    public Comment delete(int articleId, int userId) {
         Session session = this.sessionFactory.getCurrentSession();
         Comment comment = (Comment) session.createCriteria(Comment.class)
-                .add(Restrictions.eq("id", userId))
-                .add(Restrictions.eq("userId", id))
+                .add(Restrictions.eq("articleId", articleId))
+                .add(Restrictions.eq("userId", userId))
                 .list().stream()
                 .findFirst()
                 .orElse(null);
@@ -50,10 +50,10 @@ public class CommentDaoImpl implements CommentDao {
     }
 
     @Override
-    public List<Comment> getAll(int userId) {
+    public List<Comment> getAll(int articleId) {
         Session session = this.sessionFactory.getCurrentSession();
         List<Comment> comments = session.createCriteria(Comment.class)
-                .add(Restrictions.eq("userId", userId))
+                .add(Restrictions.eq("articleId", articleId))
                 .list();
         return comments;
     }

@@ -12,7 +12,7 @@ public interface CommentService {
 
     Comment update(Comment comment);
 
-    Comment delete(int id, int userId);
+    Comment delete(int articleId, int userId);
 
-    List<Comment> getAll(int userId);
+    List<Comment> getAll(int id);
 }

@@ -3,10 +3,10 @@ DROP SEQUENCE  if exists global_seq_two;
 CREATE SEQUENCE global_seq_two START 1;
 
 CREATE TABLE comments (
-  id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+  id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq_two'),
   userId            INTEGER   NOT NULL,
   articleId         INTEGER   NOT NULL,
-  text              TEXT      NOT NULL,
+  text              TEXT     NOT NULL,
   dateTime          TIMESTAMP NOT NULL
 );
 

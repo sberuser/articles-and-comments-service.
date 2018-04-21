@@ -10,9 +10,9 @@ import java.util.List;
 public interface CommentDao {
     Comment save(Comment comment);
 
-    Comment delete(int id, int userId);
+    Comment delete(int articleId, int userId);
 
     Comment update(Comment comment);
 
-    List<Comment> getAll(int userId);
+    List<Comment> getAll(int articleId);
 }
