@@ -37,7 +37,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public List<Comment> getAll(int id) {
-        return this.repository.getAll(id);
+    public List<Comment> getAll(int articleId) {
+        return this.repository.getAll(articleId);
     }
 }

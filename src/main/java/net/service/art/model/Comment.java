@@ -35,6 +35,16 @@ public class Comment {
     @JsonDeserialize(using = ParseDeserializer.class)
     private LocalDateTime dateTime;
 
+    public Comment() {
+    }
+
+    public Comment(int userId, int articleId, String text, LocalDateTime dateTime) {
+        this.userId = userId;
+        this.articleId = articleId;
+        this.text = text;
+        this.dateTime = dateTime;
+    }
+
     public int getId() {
         return id;
     }

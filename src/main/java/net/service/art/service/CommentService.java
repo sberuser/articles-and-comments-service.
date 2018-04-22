@@ -14,5 +14,5 @@ public interface CommentService {
 
     Comment delete(int articleId, int userId);
 
-    List<Comment> getAll(int id);
+    List<Comment> getAll(int articleId);
 }

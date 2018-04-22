@@ -37,6 +37,16 @@ public class Article implements Serializable {
     @JsonDeserialize(using = ParseDeserializer.class)
     private LocalDateTime dateTime;
 
+    public Article() {
+
+    }
+
+    public Article(int userId, String text, String name, LocalDateTime dateTime) {
+        this.userId = userId;
+        this.text = text;
+        this.name = name;
+        this.dateTime = dateTime;
+    }
 
     public LocalDateTime getDateTime() {
         return dateTime;
