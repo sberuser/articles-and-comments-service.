@@ -6,8 +6,8 @@ CREATE TABLE articles (
   id          INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
   name        TEXT      NOT NULL,
   text        TEXT      NOT NULL,
-  userId        INTEGER   NOT NULL,
-  dateTime        TIMESTAMP NOT NULL
+  userId      INTEGER   NOT NULL,
+  dateTime    TIMESTAMP NOT NULL
 );
 
 INSERT INTO articles (name, text, userId, dateTime) VALUES

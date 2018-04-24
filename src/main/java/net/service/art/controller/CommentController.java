@@ -26,10 +26,11 @@ public class CommentController {
     }
 
     @RequestMapping(value = "/comment/add", method = RequestMethod.POST,
-                    produces = MediaType.APPLICATION_JSON_VALUE,
-                    consumes = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Comment save(@RequestBody Comment comment) {
-        if(comment.getId() == 0) {
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    Comment save(@RequestBody Comment comment) {
+        if (comment.getId() == 0) {
             this.commentService.save(comment);
         } else {
             this.commentService.update(comment);
@@ -38,14 +39,15 @@ public class CommentController {
     }
 
     @RequestMapping(value = "/comment/deleted/{articleId}/{userId}", method = RequestMethod.DELETE,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Comment delete(@PathVariable(value = "articleId") Integer articleId,
-                                        @PathVariable(value = "userId") Integer userId) {
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    Comment delete(@PathVariable(value = "articleId") Integer articleId,
+                   @PathVariable(value = "userId") Integer userId) {
         return commentService.delete(articleId, userId);
     }
 
     @RequestMapping(value = "/comments/user/{articleId}", method = RequestMethod.GET,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Comment> getAll(@PathVariable(value = "articleId") Integer articleId) {
         return commentService.getAll(articleId);
     }

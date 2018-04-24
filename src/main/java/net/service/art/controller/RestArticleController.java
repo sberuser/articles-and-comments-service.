@@ -24,16 +24,17 @@ public class RestArticleController {
     }
 
     @RequestMapping(value = "/articles", method = RequestMethod.GET,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Article> GetListArticles(){
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Article> GetListArticles() {
         return service.listArticles();
     }
 
     @RequestMapping(value = "/article/{userId}", method = RequestMethod.POST,
-                    consumes = MediaType.APPLICATION_JSON_VALUE,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Article save(@RequestBody Article article) {
-        if(article.getId() == 0) {
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    Article save(@RequestBody Article article) {
+        if (article.getId() == 0) {
             this.service.saveArticle(article);
         } else {
             this.service.updateArticle(article);
@@ -42,20 +43,21 @@ public class RestArticleController {
     }
 
     @RequestMapping(value = "/article/{id}/{userId}", method = RequestMethod.DELETE,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Article delete(@PathVariable("id") Integer id,
-                                        @PathVariable("userId") Integer userId) {
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    Article delete(@PathVariable("id") Integer id,
+                   @PathVariable("userId") Integer userId) {
         return service.delete(userId, id);
     }
 
     @RequestMapping(value = "/article/{id}", method = RequestMethod.GET,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public Article getArticleData(@PathVariable("id") Integer id) {
         return service.get(id);
     }
 
     @RequestMapping(value = "/articles/{userId}", method = RequestMethod.GET,
-                    produces = MediaType.APPLICATION_JSON_VALUE)
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Article> getAllArticlesByUserId(@PathVariable("userId") Integer userId) {
         return service.getAll(userId);
     }
