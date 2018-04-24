@@ -16,8 +16,8 @@ public class TestData {
     public Comment UPDATE_COMMENT = new Comment(101, 100, "Update test comment", LocalDate.of(2018, 4, 9).atStartOfDay());
 
     public void init() {
-        FIRST_TEST_COMMENT.setId(100000);
-        SECOND_TEST_COMMENT.setId(100001);
+        FIRST_TEST_COMMENT.setId(100002);
+        SECOND_TEST_COMMENT.setId(100003);
         FIRST_TEST_ARTICLE.setId(100000);
         SECOND_TEST_ARTICLE.setId(100001);
     }

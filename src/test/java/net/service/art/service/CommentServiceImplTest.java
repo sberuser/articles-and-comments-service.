@@ -56,7 +56,7 @@ public class CommentServiceImplTest {
     public void deleteTest() {
         Comment comment;
 
-        comment = commentService.delete(SECOND_COMMENT.getArticleId(), SECOND_COMMENT.getUserId());
+        comment = commentService.delete(SECOND_COMMENT.getId(), SECOND_COMMENT.getUserId());
 
         assertEquals(SECOND_COMMENT.getArticleId(), comment.getArticleId());
     }
